@@ -4,16 +4,22 @@ import Cart from "./Cart/Cart";
 import HomePage from "./UI/HomePage";
 import OrderSuccessful from "./Order/OrderSuccessful";
 import { useDispatch } from "react-redux";
-import { fetchAllMeals } from "./redux";
-import axios from "axios";
+import { fetchAllMeals, fetchCartMeals } from "./redux";
 
 const App = () => {
   let isInitial = true;
   const dispatch = useDispatch();
 
+  // useEffect(() => {
+  //   if (isInitial) {
+  //     isInitial = false;
+  //   }
+  // }, [dispatch]);
+
   useEffect(() => {
     if (isInitial) {
       dispatch(fetchAllMeals());
+      dispatch(fetchCartMeals());
       isInitial = false;
     }
   }, [dispatch]);

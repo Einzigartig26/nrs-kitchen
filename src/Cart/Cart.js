@@ -10,16 +10,15 @@ import { useSelector } from "react-redux";
 const Cart = () => {
   const [confirmOrder, setConfirmOrder] = useState(false);
   const [grandTotal, setGrandTotal] = useState(0);
+  const cart = useSelector((state) => state.cart);
 
   const navigate = useNavigate();
-  const cart = useSelector((state) => state.cart.data);
 
   const changeGrandTotal = (price) => {
     setGrandTotal((state) => state - price);
   };
 
   const cartMealList = cart.cartMeals.map((item) => {
-    console.log("showing");
     return (
       <CartMeals
         key={item._id}
@@ -63,11 +62,11 @@ const Cart = () => {
       {confirmOrder ? checkoutConfirmation : <></>}
       <div className={classes["cart-header"]}>NR's Kitchen</div>
       <div className={classes["cart-middle-container"]}>
-        {cart.loading ? (
+        {cart.cartMeals.loading ? (
           <div className={classes["cart-buffer-container"]}>
             <Buffer />
           </div>
-        ) : cart.data.length ? (
+        ) : cart.cartMeals.length ? (
           cartMealList
         ) : (
           <EmptyCart />
@@ -92,15 +91,15 @@ const Cart = () => {
             >
               Back to menu
             </button>
-            {/* {context.headerCount ? (
+            {cart.cartMealCount ? (
               <button
                 className={
-                  context.headerCount
+                  cart.cartMealCount
                     ? classes["order-button"]
                     : classes["disabled-order-button"]
                 }
                 onClick={
-                  context.headerCount
+                  cart.cartMealCount
                     ? () => {
                         setConfirmOrder(true);
                       }
@@ -111,7 +110,7 @@ const Cart = () => {
               </button>
             ) : (
               <></>
-            )} */}
+            )}
           </div>
         </div>
       </div>
