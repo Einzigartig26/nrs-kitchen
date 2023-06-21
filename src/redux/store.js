@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import mealReducer from "./meal";
+import mealsReducer from "./meal";
 
 const store = configureStore({
   reducer: {
-    meals: mealReducer,
+    meals: mealsReducer,
   },
 });
 

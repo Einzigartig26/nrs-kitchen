@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import Card from "./Card";
 import classes from "./AvailableMeals.module.css";
 import { useSelector } from "react-redux";

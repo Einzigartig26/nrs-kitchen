@@ -5,13 +5,12 @@ import Card from "../Meals/Card";
 import { useEffect } from "react";
 import Buffer from "./Buffer";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllMeals } from "../redux";
 
 function HomePage() {
   // const [availableMeals, setAvailableMeals] = useState([]);
   const dispatch = useDispatch();
   const meals = useSelector((state) => state.meals.meals);
-  const meal = useSelector((state) => state.meal);
+  const isLoading = useSelector((state) => state.meals.isLoading);
   const availableMeals = [];
 
   useEffect(() => {
@@ -32,7 +31,7 @@ function HomePage() {
       <WallPaper />
       <div className="bottom">
         <div className="menu-container">
-          {meal.loading ? <Buffer /> : mealList}
+          {isLoading ? <Buffer /> : mealList}
         </div>
       </div>
     </div>

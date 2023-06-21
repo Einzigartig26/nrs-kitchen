@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 
 const Header = () => {
   const navigate = useNavigate();
-  const cart = useSelector((state) => state.cart.data);
 
   const goToCart = () => {
     navigate("cart");
@@ -33,7 +32,7 @@ const Header = () => {
           </div>
           <div className={classes["your-cart"]}>Your Cart</div>
           <div className={classes["item-count"]}>
-            {cart.cartMealCount ? cart.cartMealCount : "0"}
+            {/* {cart.cartMealCount ? cart.cartMealCount : "0"} */}
           </div>
         </button>
       </div>

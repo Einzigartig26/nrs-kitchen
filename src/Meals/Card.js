@@ -1,17 +1,19 @@
-import axios from "axios";
 import React, { useState } from "react";
 import classes from "./Card.module.css";
 import Star from "./Star";
-import { useDispatch, useSelector } from "react-redux";
-import { decreaseCartQuantity } from "../redux";
+import { useSelector } from "react-redux";
 
 const Card = ({ item, index }) => {
   const [disable, setDisable] = useState(false);
   const [inputMealValue, setInputMealValue] = useState(
     item.mealQuantity ? item.mealQuantity : 0
   );
-  const dispatch = useDispatch();
-  const cartMeal = useSelector((state) => state.cart.data.cartMeals);
+  // this is th comment
+  let meals = useSelector((state) => state.meals.meals);
+  // console.log(meals);
+  // let sorted = meals.slice().sort((a, b) => (a.mealName > b.mealName ? 1 : -1));
+  // console.log(sorted);
+
   // const addMeal = () => {
   //   setDisable(true);
   //   axios
@@ -32,14 +34,13 @@ const Card = ({ item, index }) => {
   //   dispatch(decreaseCartQuantity(item._id));
   // };
 
-  const found = cartMeal.find((meal) => meal._id === item._id);
-  console.log(found, "Found one ");
+  const found = meals.find((meal) => meal._id === item._id);
+
   return (
     <li
       className={classes["meal-container"]}
       style={index ? {} : { borderBottom: "1px solid black" }}
     >
-      {console.log(cartMeal)}
       <div>
         <div className={classes["star-name-container"]}>
           <p className={classes["meal-name"]}>{item.mealName}</p>
