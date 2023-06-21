@@ -1,0 +1,57 @@
+.card {
+  width: auto;
+  background-color: rgb(251 227 239);
+  margin-left: auto;
+  margin-right: auto;
+  border-bottom: 1px solid black;
+  list-style: none;
+  padding: 1rem;
+}
+
+.stars {
+  height: auto;
+  width: auto;
+}
+
+.meal-name {
+  color: #94255c;
+  font-size: 2rem;
+  font-weight: bolder;
+}
+
+.top-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.bottom-container {
+  margin-top: 2rem;
+}
+
+.comment-input {
+  height: 3rem;
+  min-width: 94%;
+  border: none;
+  outline: none;
+  resize: none;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  font-family: cooper;
+}
+
+.comment-input::-webkit-scrollbar {
+  display: none;
+}
+
+.submit-btn {
+  padding: 0.5rem 1rem 0.5rem;
+  border-radius: 90px;
+  border: none;
+  background-color: #94255c;
+  color: white;
+  font-weight: bold;
+  margin-top: 0.2rem;
+}

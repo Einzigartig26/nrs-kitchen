@@ -1,0 +1,15 @@
+.empty-cart-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.image-container {
+  height: auto;
+  width: auto;
+  margin-top: 6rem;
+}
+
+.empty-cart-image {
+  height: 20rem;
+}

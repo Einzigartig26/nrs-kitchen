@@ -1,0 +1,27 @@
+.form-container {
+  min-width: 10.5rem;
+  height: auto;
+}
+
+.quantity-input {
+  width: 3rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  text-align: center;
+  outline: none;
+}
+
+.increase,
+.decrease {
+  background-color: #94255c;
+  border: none;
+  border-radius: 5px;
+  width: 2.5rem;
+  height: 1.5rem;
+  color: white;
+  font-weight: 900;
+}
+.increase:active,
+.decrease:active {
+  box-shadow: 1px 1px 5px black;
+}

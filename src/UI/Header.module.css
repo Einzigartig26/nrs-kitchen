@@ -1,0 +1,76 @@
+.header {
+  height: 6rem;
+  width: 100%;
+  background-color: #94255c;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  align-items: center;
+  position: fixed;
+  border-bottom-left-radius: 2rem;
+}
+
+.heading {
+  font-size: 3rem;
+  font-weight: bolder;
+  text-shadow: 2px 4px 5px black;
+  color: white;
+  font-family: gabriola;
+  padding: 0.7rem;
+  margin-left: 1.5rem;
+}
+.icon {
+  margin-left: 0.7rem;
+  width: 1.5rem;
+  pointer-events: none;
+}
+
+.button-container {
+  margin-right: 1.5rem;
+  border-radius: 90px;
+  display: flex;
+  align-items: center;
+}
+
+.button-container > button :active {
+  box-shadow: 0px 2px 5px black;
+}
+
+.btn {
+  width: 10rem;
+  height: 2.8rem;
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  border-radius: 90px;
+  border: none;
+  background-color: #3aa0a0;
+  margin-left: 3rem;
+}
+
+.your-cart {
+  color: white;
+  font-weight: 900;
+  pointer-events: none;
+}
+
+.item-count {
+  background-color: rgb(161, 127, 13);
+  padding-left: 0.8rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-right: 0.8rem;
+  border-radius: 90px;
+  margin-right: 0.7rem;
+  background-color: #b94517;
+  pointer-events: none;
+  color: white;
+  font-weight: 900;
+}
+
+.account-link {
+  text-decoration: none;
+  color: white;
+  font-weight: bolder;
+  font-size: 1.3rem;
+}

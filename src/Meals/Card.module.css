@@ -1,0 +1,96 @@
+.meal-container {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 5fr minmax(200px, 1fr);
+  padding: 2rem;
+  box-sizing: border-box;
+  margin: 1.5rem;
+}
+
+.meal-name {
+  font-size: 1.8rem;
+  font-weight: bolder;
+  color: #94255c;
+  margin: 0;
+  margin: 0.4rem;
+}
+
+.meal-description {
+  font-family: Noto Sans, sans-serif;
+  font-style: italic;
+  margin: 0;
+  font-weight: 200;
+  margin: 0.2rem;
+}
+
+.meal-price {
+  margin: 0;
+  font-weight: bolder;
+  font-size: 1rem;
+  color: black;
+  margin: 0.2rem;
+}
+
+.star-name-container {
+  display: flex;
+  align-items: center;
+}
+
+.add-button {
+  border-radius: 90px;
+  border: none;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+  background-color: #94255c;
+  color: white;
+  font-weight: bolder;
+  width: 7rem;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.add-button:active {
+  box-shadow: 1px 1px 3px black;
+}
+
+.btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-container {
+  display: flex;
+}
+
+.quantityInput {
+  width: 4rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  text-align: center;
+  outline: none;
+  border-radius: 90rem;
+  border: 1px solid gray;
+  background-color: white;
+  font-weight: bolder;
+  font-size: 1rem;
+  color: black;
+}
+
+.decrease-quantity,
+.increase-quantity {
+  font-size: 1.5rem;
+  background-color: #94255c;
+  border: none;
+  border-radius: 5px;
+  width: 3rem;
+  color: white;
+  font-weight: 900;
+}
+
+.decrease-quantity:active,
+.increase-quantity:active {
+  box-shadow: #63193e 0px 2px 2px;
+}

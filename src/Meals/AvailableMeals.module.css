@@ -1,0 +1,12 @@
+.menu-container {
+  background-color: rgb(251 227 239);
+  width: 85%;
+  margin: auto;
+  height: auto;
+  border-radius: 20px;
+  margin-top: 4rem;
+  box-shadow: 2px 2px 8px #94255c;
+  margin-bottom: 3rem;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}

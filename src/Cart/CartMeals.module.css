@@ -1,0 +1,94 @@
+.meal {
+  list-style: none;
+  margin: 2rem 7rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid black;
+  justify-content: space-between;
+  height: 5rem;
+  width: 85vw;
+}
+
+.meal-name {
+  color: #94255c;
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.meal-price {
+  color: black;
+  font-weight: bold;
+}
+
+.quantity {
+  color: black;
+  font-weight: bolder;
+  vertical-align: middle;
+  min-width: 2rem;
+  font-size: 1.2rem;
+}
+
+.container {
+  width: 15rem;
+}
+
+.detail-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn-container {
+  display: flex;
+  align-items: center;
+}
+
+.totalPrice {
+  color: #94255c;
+  font-weight: bolder;
+  margin-left: 1rem;
+  font-size: 1.2rem;
+}
+
+.image {
+  pointer-events: none;
+}
+.deleteButton {
+  background-color: white;
+  border: none;
+  height: 2rem;
+  width: 2rem;
+  margin-left: 1rem;
+}
+.deleteButton:hover {
+  cursor: pointer;
+}
+.form-container {
+  min-width: 10.5rem;
+  height: auto;
+}
+
+.quantity-input {
+  width: 4rem;
+  height: 1.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  text-align: center;
+  outline: none;
+}
+
+.increase,
+.decrease {
+  font-size: 1rem;
+  background-color: #94255c;
+  border: none;
+  border-radius: 5px;
+  width: 3.5rem;
+  height: 2rem;
+  color: white;
+  font-weight: 900;
+}
+.increase:active,
+.decrease:active {
+  box-shadow: 1px 1px 5px black;
+}

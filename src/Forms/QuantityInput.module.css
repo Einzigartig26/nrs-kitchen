@@ -1,0 +1,30 @@
+.btn {
+  border-radius: 90px;
+  border: none;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+  background-color: #94255c;
+  color: white;
+  font-weight: bolder;
+  width: 7rem;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.btn:active {
+  box-shadow: 1px 1px 3px black;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input {
+  width: 5rem;
+  outline: none;
+  text-align: center;
+}

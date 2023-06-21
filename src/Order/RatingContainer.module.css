@@ -1,0 +1,31 @@
+.rating-container {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.rating {
+  height: 24rem;
+  width: 50%;
+  background-color: rgb(251 227 239);
+  border-radius: 20px;
+  margin-right: auto;
+  margin-top: 3rem;
+  padding: 3rem;
+  overflow: auto;
+  margin-left: auto;
+}
+
+.rating::-webkit-scrollbar {
+  display: none;
+}
+
+.back-to-home {
+  border-radius: 90px;
+  background-color: #94255c;
+  color: white;
+  font-weight: bold;
+  padding: 1rem 1.5rem 1rem;
+  border: none;
+}
