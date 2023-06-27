@@ -74,3 +74,32 @@
   font-weight: bolder;
   font-size: 1.3rem;
 }
+
+.search-bar {
+  border-radius: 90rem;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  outline: none;
+  width: 3rem;
+  color: rgb(97, 97, 97);
+  padding: 0.7rem 0rem;
+}
+
+.search-bar:focus {
+  width: 28rem;
+  padding: 0.7rem 1.3rem;
+  transition: 0.3s;
+  background-position: center center;
+}
+
+.search-bar:not(:focus) {
+  transition: 0.3s;
+  background: url("/src/Icons/magnifying-glass-solid.svg");
+  background-repeat: no-repeat;
+  background-size: 1rem 1.1rem;
+  padding: 0.9rem 0rem;
+  background-position: center center;
+  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+}

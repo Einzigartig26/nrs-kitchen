@@ -2,27 +2,31 @@ import "./HomePage.css";
 import Header from "./Header";
 import WallPaper from "./WallPaper";
 import Card from "../Meals/Card";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Buffer from "./Buffer";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-function HomePage() {
-  // const [availableMeals, setAvailableMeals] = useState([]);
-  const dispatch = useDispatch();
-  const meals = useSelector((state) => state.meals.meals);
-  const isLoading = useSelector((state) => state.meals.isLoading);
-  const availableMeals = [];
+const HomePage = () => {
+  const mealsSelector = useSelector((state) => state.meals);
+  const [emptyMenu, setEmptyMenu] = useState(<></>);
+  const mealList = mealsSelector.meals.filter((meal) =>
+    meal.mealName
+      .toLowerCase()
+      .split(" ")
+      .join("")
+      .includes(mealsSelector.searchMeal.toLowerCase())
+  );
 
   useEffect(() => {
-    // dispatch(fetchCartMeals(dispatch));
-  }, [dispatch]);
+    setEmptyMenu(<div className="empty-menu">Opps, No Food found!</div>);
+  }, []);
 
-  const mealList = meals.map((item, index) => {
-    if (index === availableMeals.length - 1) {
-      return <Card key={item._id} item={item} index={index} />;
-    } else {
-      return <Card key={item._id} item={item} />;
-    }
+  let menuMeals = mealList.map((item, index) => {
+    return index === mealList.length - 1 ? (
+      <Card key={item._id} item={item} index={true} />
+    ) : (
+      <Card key={item._id} item={item} index={false} />
+    );
   });
 
   return (
@@ -31,11 +35,17 @@ function HomePage() {
       <WallPaper />
       <div className="bottom">
         <div className="menu-container">
-          {isLoading ? <Buffer /> : mealList}
+          {mealsSelector.isLoading ? (
+            <Buffer />
+          ) : menuMeals.length ? (
+            menuMeals
+          ) : (
+            emptyMenu
+          )}
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default HomePage;

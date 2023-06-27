@@ -1,38 +1,95 @@
 import React, { useState } from "react";
 import deleteIcon from "../Img/trash-solid.svg";
 import classes from "./CartMeals.module.css";
-
+import axios from "axios";
 import { useDispatch } from "react-redux";
+import { cartActions } from "../redux";
 
 const CartMeals = (props) => {
   const [disable, setDisable] = useState(false);
-  const [mealQuantity, setMealQuantity] = useState(props.mealQuantity);
+  const [inputMealValue, setInputMealValue] = useState(props.mealQuantity);
   const dispatch = useDispatch();
 
-  // deleteing the meal from the cart and decreasing it in the cart context
+  const increaseQuantity = () => {
+    setDisable(true);
 
-  // decreasing the count of the meal by one in cart and cart context
+    axios
+      .post("http://localhost:8080/nrs_kitchen/cart/add_to_cart", {
+        mealId: props.mealId,
+      })
+      .then((result) => {
+        setInputMealValue(inputMealValue + 1);
+        dispatch(
+          cartActions.changeCartMealCount({
+            change: 1,
+            meal: {
+              mealName: props.mealName,
+              mealPrice: props.mealPrice,
+              _id: props.mealId,
+              mealQuantity: props.mealQuantity,
+            },
+          })
+        );
+        setDisable(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-  // increasing the count of the meal by one in cart and cart context
-  // const increaseQuantity = () => {
-  //   setDisable(true);
+  const decreaseQuantity = () => {
+    setDisable(true);
 
-  //   axios
-  //     .post("http://localhost:8080/nrs_kitchen/cart/add_to_cart", {
-  //       mealId: props.mealId,
-  //     })
-  //     .then((result) => {
-  //       setMealQuantity((state) => state + 1);
-  //       setDisable(false);
-  //       props.changeGrandTotal(-props.mealPrice);
-  //       cartContext.setHeaderCount(cartContext.headerCount + 1);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+    axios
+      .put("http://localhost:8080/nrs_kitchen/cart/decrease_quantity", {
+        mealId: props.mealId,
+      })
+      .then((result) => {
+        setInputMealValue(inputMealValue - 1);
+        dispatch(
+          cartActions.changeCartMealCount({
+            change: -1,
+            meal: {
+              mealName: props.mealName,
+              mealPrice: props.mealPrice,
+              _id: props.mealId,
+              mealQuantity: props.mealQuantity,
+            },
+          })
+        );
+        setDisable(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-  if (mealQuantity) {
+  const deleteMealFromCart = () => {
+    axios
+      .delete(
+        "http://localhost:8080/nrs_kitchen/cart/delete_meal_from_cart" +
+          `${props.mealId}`
+      )
+      .then((result) => {
+        dispatch(
+          cartActions.changeCartMealCount({
+            change: -1,
+            meal: {
+              mealName: props.mealName,
+              mealPrice: props.mealPrice,
+              _id: props.mealId,
+              mealQuantity: props.mealQuantity,
+            },
+            delete: true,
+          })
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  if (props.mealQuantity) {
     return (
       <li key={props.mealId} className={classes.meal}>
         <div className={classes["detail-container"]}>
@@ -42,40 +99,37 @@ const CartMeals = (props) => {
               Price : ₹{props.mealPrice}
             </div>
           </section>
-          <div className={classes.quantity}>x {mealQuantity}</div>
+          <div className={classes.quantity}>x {props.mealQuantity}</div>
 
           <div className={classes.totalPrice}>
-            Total : ₹ {props.mealPrice * mealQuantity}
+            Total : ₹ {props.mealPrice * props.mealQuantity}
           </div>
         </div>
         <div className={classes["btn-container"]}>
           <div className={classes["form-container"]}>
             <button
               className={classes.decrease}
-              // onClick={decreaseQuantity}
+              onClick={() => {
+                decreaseQuantity();
+              }}
               disabled={disable}
             >
               -
             </button>
             <input
               className={classes["quantity-input"]}
-              value={mealQuantity}
+              value={props.mealQuantity}
               disabled
             />
             <button
               className={classes.increase}
-              // onClick={increaseQuantity}
+              onClick={increaseQuantity}
               disabled={disable}
             >
               +
             </button>
           </div>
-          <button
-            className={classes.deleteButton}
-            onClick={() => {
-              // deleteCartMeal(props.mealId);
-            }}
-          >
+          <button className={classes.deleteButton} onClick={deleteMealFromCart}>
             <img
               src={deleteIcon}
               width="100%"

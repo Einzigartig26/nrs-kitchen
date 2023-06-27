@@ -4,6 +4,7 @@ import axios from "axios";
 const initialState = {
   meals: [],
   isLoading: false,
+  searchMeal: "",
 };
 
 const mealsSlice = createSlice({
@@ -18,6 +19,9 @@ const mealsSlice = createSlice({
     },
     mealsFetchedSuccessfully: (state) => {
       state.isLoading = false;
+    },
+    setSearchMeal: (state, action) => {
+      state.searchMeal = action.payload;
     },
   },
 });

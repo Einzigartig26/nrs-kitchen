@@ -1,22 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import classes from "./Cart.module.css";
 import CartMeals from "./CartMeals";
 import Buffer from "../UI/Buffer";
 import EmptyCart from "./EmptyCart";
-
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { cartActions, fetchCartMeals } from "../redux";
 
 const Cart = () => {
+  const cart = useSelector((state) => state.cart);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [confirmOrder, setConfirmOrder] = useState(false);
   const [grandTotal, setGrandTotal] = useState(0);
-  const cart = useSelector((state) => state.cart);
 
-  const navigate = useNavigate();
-
-  const changeGrandTotal = (price) => {
-    setGrandTotal((state) => state - price);
-  };
+  useEffect(() => {
+    dispatch(fetchCartMeals());
+    setGrandTotal(cart.grandTotal);
+  }, [dispatch, cart.grandTotal, cart.stateUpdate]);
 
   const cartMealList = cart.cartMeals.map((item) => {
     return (
@@ -26,7 +27,6 @@ const Cart = () => {
         mealQuantity={item.mealQuantity}
         mealName={item.mealName}
         mealPrice={item.mealPrice}
-        changeGrandTotal={changeGrandTotal}
       />
     );
   });
@@ -56,37 +56,41 @@ const Cart = () => {
       </div>
     </div>
   );
-
   return (
     <div className={classes["cart-container"]}>
       {confirmOrder ? checkoutConfirmation : <></>}
       <div className={classes["cart-header"]}>NR's Kitchen</div>
       <div className={classes["cart-middle-container"]}>
-        {cart.cartMeals.loading ? (
+        {cart.isLoading ? (
           <div className={classes["cart-buffer-container"]}>
             <Buffer />
           </div>
-        ) : cart.cartMeals.length ? (
+        ) : cartMealList.length ? (
           cartMealList
         ) : (
           <EmptyCart />
         )}
 
         <div className={classes["cart-bottom-container"]}>
-          <div className={classes["total-price-container"]}>
-            <div className={classes["grand-total-container"]}>
-              Grand Total : {grandTotal + (grandTotal * 18) / 100} ₹
+          {cart.isLoading ? (
+            <></>
+          ) : (
+            <div className={classes["total-price-container"]}>
+              <div className={classes["grand-total-container"]}>
+                Grand Total :{parseInt(grandTotal) + (grandTotal * 18) / 100}₹
+              </div>
+              <div className={classes["gst-container"]}>
+                GST(18%): {((grandTotal * 18) / 100).toFixed(2)} ₹
+              </div>
             </div>
-            <div className={classes["gst-container"]}>
-              GST(18%): {(grandTotal * 18) / 100} ₹
-            </div>
-          </div>
+          )}
 
           <div className={classes["cart-button-container"]}>
             <button
               className={classes["back-to-menu-button"]}
               onClick={() => {
-                navigate("/");
+                dispatch(cartActions.updteState());
+                navigate(-1);
               }}
             >
               Back to menu
@@ -98,13 +102,10 @@ const Cart = () => {
                     ? classes["order-button"]
                     : classes["disabled-order-button"]
                 }
-                onClick={
-                  cart.cartMealCount
-                    ? () => {
-                        setConfirmOrder(true);
-                      }
-                    : () => {}
-                }
+                onClick={() => {
+                  setConfirmOrder(true);
+                }}
+                disabled={cart.cartMealCount === 0}
               >
                 Order
               </button>

@@ -3,26 +3,17 @@ import { Route, Routes } from "react-router-dom";
 import Cart from "./Cart/Cart";
 import HomePage from "./UI/HomePage";
 import OrderSuccessful from "./Order/OrderSuccessful";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchAllMeals, fetchCartMeals } from "./redux";
 
 const App = () => {
-  let isInitial = true;
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   if (isInitial) {
-  //     isInitial = false;
-  //   }
-  // }, [dispatch]);
+  const cart = useSelector((state) => state.cart);
 
   useEffect(() => {
-    if (isInitial) {
-      dispatch(fetchAllMeals());
-      dispatch(fetchCartMeals());
-      isInitial = false;
-    }
-  }, [dispatch]);
+    dispatch(fetchAllMeals());
+    dispatch(fetchCartMeals());
+  }, [dispatch, cart.stateUpdate]);
 
   return (
     <Routes>

@@ -23,3 +23,13 @@
   align-items: center;
   justify-content: center;
 }
+
+.empty-menu {
+  height: 20rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #94255c;
+  font-weight: bold;
+}

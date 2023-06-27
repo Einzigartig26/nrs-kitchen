@@ -1,40 +1,64 @@
 import React, { useState } from "react";
 import classes from "./Card.module.css";
 import Star from "./Star";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+
+import axios from "axios";
+import { cartActions } from "../redux/cart";
 
 const Card = ({ item, index }) => {
   const [disable, setDisable] = useState(false);
   const [inputMealValue, setInputMealValue] = useState(
     item.mealQuantity ? item.mealQuantity : 0
   );
-  // this is th comment
-  let meals = useSelector((state) => state.meals.meals);
-  // console.log(meals);
-  // let sorted = meals.slice().sort((a, b) => (a.mealName > b.mealName ? 1 : -1));
-  // console.log(sorted);
 
-  // const addMeal = () => {
-  //   setDisable(true);
-  //   axios
-  //     .post("http://localhost:8080/nrs_kitchen/cart/add_to_cart", {
-  //       mealId: item._id,
-  //     })
-  //     .then((result) => {
-  //       cartContext.setHeaderCount(cartContext.headerCount + 1);
-  //       setInputMealValue(inputMealValue + 1);
-  //       setDisable(false);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+  const dispatch = useDispatch();
 
-  // const decreaseQuantity = () => {
-  //   dispatch(decreaseCartQuantity(item._id));
-  // };
+  const addToCart = () => {
+    setDisable(true);
 
-  const found = meals.find((meal) => meal._id === item._id);
+    axios
+      .post("http://localhost:8080/nrs_kitchen/cart/add_to_cart", {
+        mealId: item._id,
+      })
+      .then((result) => {
+        setInputMealValue(inputMealValue + 1);
+        dispatch(
+          cartActions.changeCartMealCount({
+            change: 1,
+            meal: {
+              mealName: item.mealName,
+              mealPrice: item.mealPrice,
+              _id: item._id,
+              mealQuantity: inputMealValue,
+            },
+          })
+        );
+        setDisable(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const decreaseQuantity = () => {
+    setDisable(true);
+
+    axios
+      .put("http://localhost:8080/nrs_kitchen/cart/decrease_quantity", {
+        mealId: item._id,
+      })
+      .then((result) => {
+        setInputMealValue(inputMealValue - 1);
+        dispatch(
+          cartActions.changeCartMealCount({ change: -1, mealId: item._id })
+        );
+        setDisable(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <li
@@ -51,23 +75,23 @@ const Card = ({ item, index }) => {
       </div>
 
       <div className={classes["btn-container"]}>
-        {found.mealQuantity ? (
+        {inputMealValue ? (
           <div className={classes["input-container"]}>
             <button
               className={classes["decrease-quantity"]}
-              // onClick={decreaseQuantity}
+              onClick={decreaseQuantity}
               disabled={disable}
             >
               -
             </button>
             <input
               className={classes.quantityInput}
-              value={found.mealQuantity}
+              value={inputMealValue}
               disabled
             />
             <button
               className={classes["increase-quantity"]}
-              // onClick={addMeal}
+              onClick={addToCart}
               disabled={disable}
             >
               +
@@ -77,7 +101,7 @@ const Card = ({ item, index }) => {
           <>
             <button
               className={classes["add-button"]}
-              // onClick={addMeal}
+              onClick={addToCart}
               disabled={disable}
             >
               + Add
