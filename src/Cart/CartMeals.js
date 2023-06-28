@@ -10,9 +10,8 @@ const CartMeals = (props) => {
   const [inputMealValue, setInputMealValue] = useState(props.mealQuantity);
   const dispatch = useDispatch();
 
-  const increaseQuantity = () => {
+  const increaseQuantity = (event) => {
     setDisable(true);
-
     axios
       .post("http://localhost:8080/nrs_kitchen/cart/add_to_cart", {
         mealId: props.mealId,
@@ -39,7 +38,6 @@ const CartMeals = (props) => {
 
   const decreaseQuantity = () => {
     setDisable(true);
-
     axios
       .put("http://localhost:8080/nrs_kitchen/cart/decrease_quantity", {
         mealId: props.mealId,

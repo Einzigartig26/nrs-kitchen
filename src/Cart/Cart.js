@@ -5,7 +5,7 @@ import CartMeals from "./CartMeals";
 import Buffer from "../UI/Buffer";
 import EmptyCart from "./EmptyCart";
 import { useDispatch, useSelector } from "react-redux";
-import { cartActions, fetchCartMeals } from "../redux";
+import { cartActions } from "../redux";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
@@ -15,7 +15,6 @@ const Cart = () => {
   const [grandTotal, setGrandTotal] = useState(0);
 
   useEffect(() => {
-    dispatch(fetchCartMeals());
     setGrandTotal(cart.grandTotal);
   }, [dispatch, cart.grandTotal, cart.stateUpdate]);
 
@@ -56,6 +55,7 @@ const Cart = () => {
       </div>
     </div>
   );
+
   return (
     <div className={classes["cart-container"]}>
       {confirmOrder ? checkoutConfirmation : <></>}

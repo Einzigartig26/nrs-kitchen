@@ -14,7 +14,7 @@ const cartSlice = createSlice({
 
   initialState: initialState,
   reducers: {
-    setIsLoadingTrue: (state) => {
+    setIsLoadingTrue: (state, action) => {
       state.isLoading = true;
     },
     setIsLoadingFalse: (state) => {

@@ -4,11 +4,14 @@ import WallPaper from "./WallPaper";
 import Card from "../Meals/Card";
 import React, { useEffect, useState } from "react";
 import Buffer from "./Buffer";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllMeals, fetchCartMeals } from "../redux";
 
 const HomePage = () => {
   const mealsSelector = useSelector((state) => state.meals);
+  const dispatch = useDispatch();
   const [emptyMenu, setEmptyMenu] = useState(<></>);
+
   const mealList = mealsSelector.meals.filter((meal) =>
     meal.mealName
       .toLowerCase()
@@ -16,6 +19,11 @@ const HomePage = () => {
       .join("")
       .includes(mealsSelector.searchMeal.toLowerCase())
   );
+
+  useEffect(() => {
+    dispatch(fetchAllMeals());
+    dispatch(fetchCartMeals());
+  }, [dispatch]);
 
   useEffect(() => {
     setEmptyMenu(<div className="empty-menu">Opps, No Food found!</div>);
